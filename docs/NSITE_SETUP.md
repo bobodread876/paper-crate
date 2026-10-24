@@ -29,7 +29,7 @@ export NOSTR_PRIVATE_KEY="nsec1your_private_key_here"
 npm run deploy:nsite:full
 ```
 
-That's it! Your site will be live on Nostr.
+Your site will be live on Nostr.
 
 ## 📋 Detailed Setup
 
@@ -341,7 +341,7 @@ NOSTR_ENV=staging npm run deploy:nsite
 
 ---
 
-## 🎉 Success!
+## Result
 
 Once deployed, your Nostr Creator Economy platform will be:
 
