@@ -1,7 +1,7 @@
 // Import Buffer polyfill before anything else
 import { Buffer } from 'buffer';
-(globalThis as any).Buffer = Buffer;
-(window as any).Buffer = Buffer;
+(globalThis as unknown as { Buffer: typeof Buffer }).Buffer = Buffer;
+(window as unknown as { Buffer: typeof Buffer }).Buffer = Buffer;
 
 import { createRoot } from 'react-dom/client';
 

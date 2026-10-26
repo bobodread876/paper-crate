@@ -3,24 +3,28 @@
  */
 import { Buffer } from 'buffer';
 
+type PolyfillTarget = Record<string, unknown>;
+const globalTarget = globalThis as unknown as PolyfillTarget;
+
 // Make Buffer available globally with more aggressive polyfilling
 if (typeof globalThis !== 'undefined') {
-  (globalThis as any).Buffer = Buffer;
-  (globalThis as any).global = globalThis;
+  globalTarget.Buffer = Buffer;
+  globalTarget.global = globalThis;
 }
 
 if (typeof window !== 'undefined') {
-  (window as any).Buffer = Buffer;
-  (window as any).global = window;
+  const windowTarget = window as unknown as PolyfillTarget;
+  windowTarget.Buffer = Buffer;
+  windowTarget.global = window;
 }
 
 // Ensure process.env exists for compatibility
-if (typeof globalThis !== 'undefined' && !(globalThis as any).process) {
-  (globalThis as any).process = { env: {} };
+if (typeof globalThis !== 'undefined' && !globalTarget.process) {
+  globalTarget.process = { env: {} };
 }
 
-if (typeof window !== 'undefined' && !(window as any).process) {
-  (window as any).process = { env: {} };
+if (typeof window !== 'undefined' && !(window as unknown as PolyfillTarget).process) {
+  (window as unknown as PolyfillTarget).process = { env: {} };
 }
 
 /**
